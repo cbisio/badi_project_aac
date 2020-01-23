@@ -28,37 +28,39 @@ namespace :web_sc_namespace do
     file = File.open("roomsIds.txt", "w")
     
     body.length.times do |item|
-      habitaciones.push(body[item]["id"])
-    end
-    file.close
+      @title = body[item]["title"]
+      @price = body[item]["prices_attributes"]["price"].gsub ".", "" 
+      @description = body[item]["description"]
+      @latitude = body[item]["latitude"]
+      @longitude = body[item]["longitude"]
+      @bills_included = body[item]["prices_attributes"]["bills_included"]
+      @deposit = body[item]["prices_attributes"]["deposit"]
+      #@room_size
+      #@property_size
+      @owner_name = body[item]["tenants"]["first_name"]+" "+["tenants"]["last_name"]
+      @owner_birth = body[item]["tenants"]["birth_date"]
+      @owner_gender = body[item]["tenants"]["biological_sex"]
+      @owner_about = body[item]["tenants"]["small_bio"]
 
-
-    habitaciones.each do |habitacion|
-
-      # Fetch and parse HTML document
-      doc = Nokogiri::HTML(open("https://badi.com/es/room/#{habitacion}")) 
-
-      doc.css('h1.room__title').each do |link|
-        @title = link.content
-      end 
-
-      doc.css('div.styled-components__FlexChild-jzrolq-0 h4').each do |link|
-        @price = link.content.gsub ".", ""
-      end
-
-      doc.css('div.form__fieldset p').each do |link|
-        @description = link.content
-      end
-
-      doc.css('h1.Heading__StyledHeading-cuu5h0-0').each do |link|
-        @owner = link.content
-      end
-
-      req_payload = {
-          :title => @title, :price => @price, :description => @description
+      room_params = {
+          :title => @title, :price => @price, :description => @description,
+           :latitude => @latitude, :longitude => @longitude, :num_visits => 0, 
+           :bills_included => @bills_included, :deposit => @deposit
       }
 
-      puts req_payload
+      user_params = {
+          :name => @owner_name, :birth_date => @owner_birth, :gender => @owner_gender, :about => @owner_about
+      }
+
+      @room = Room.create!(room_params)
+      User.create!(user_params)
+      @num = 0
+      body[item]["pictures"].each do |picture|
+        Photos.create!(:url => picture[url], :order => @num, :room_id => @room.id)
+        @num = @num + 1
+      end
     end
+    file.close
+    
   end
 end
