@@ -21,6 +21,11 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+# Ignore DB 
+.env
+.env.local
+.env.test
+
 # Ignore coverage folder
 coverage
 

@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_174053) do
+ActiveRecord::Schema.define(version: 2020_01_23_121802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "extras", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "extras_rooms", id: false, force: :cascade do |t|
+    t.bigint "room_id", null: false
+    t.bigint "extra_id", null: false
+    t.index ["extra_id", "room_id"], name: "index_extras_rooms_on_extra_id_and_room_id"
+    t.index ["room_id", "extra_id"], name: "index_extras_rooms_on_room_id_and_extra_id"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "url"
+    t.integer "order"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "room_id", null: false
+    t.index ["room_id"], name: "index_photos_on_room_id"
+  end
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
@@ -41,5 +63,6 @@ ActiveRecord::Schema.define(version: 2020_01_22_174053) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "photos", "rooms"
   add_foreign_key "rooms", "users"
 end

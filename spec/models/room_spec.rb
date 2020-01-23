@@ -4,6 +4,8 @@ RSpec.describe Room, type: :model do
   
   it { should belong_to(:user) }
 
+  it { should have_and_belong_to_many(:extras) }
+
   it 'validate presence of required fields ' do
     should validate_presence_of(:name)
     should validate_presence_of(:price)
