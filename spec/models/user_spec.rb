@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
 
   it 'validate presence of require fields ' do
     should validate_presence_of(:name)
-    should validate_presence_of(:birth)
+    should validate_presence_of(:birth_date)
     should validate_presence_of(:gender)
   end
 

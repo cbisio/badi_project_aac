@@ -12,6 +12,7 @@ RSpec.describe Room, type: :model do
     should validate_presence_of(:description)
     should validate_presence_of(:latitude)
     should validate_presence_of(:longitude)
+    should validate_presence_of(:address)
   end
   
 end

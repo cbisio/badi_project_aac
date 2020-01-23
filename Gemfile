@@ -15,8 +15,7 @@ gem 'grape-entity'
 gem 'grape_on_rails_routes'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
-# Enforces Rails best practices and coding conventions.
-gem 'rubocop-rails', require: false
+
 # Sharing configuration variables across environments
 gem 'dotenv-rails', groups: [:development, :test]
 
@@ -28,6 +27,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.9'
   # Use Pry to debug
   gem 'pry-rails'
+  # Enforces Rails best practices and coding conventions.
+  gem 'rubocop-rails', require: false
 end
 
 group :test do
@@ -51,5 +52,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'ancestry'
