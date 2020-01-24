@@ -4,6 +4,8 @@ RSpec.describe Room, type: :model do
   
   it { should belong_to(:user) }
 
+  it { should belong_to(:city) }
+
   it { should have_many(:photos) }
 
   it { should have_and_belong_to_many(:extras) }
@@ -15,8 +17,14 @@ RSpec.describe Room, type: :model do
     should validate_presence_of(:latitude)
     should validate_presence_of(:longitude)
     should validate_presence_of(:address)
+    should validate_presence_of(:currency)
   end
  
+  it 'currency must be € or $' do
+    room = Room.new
+    expect(room).to validate_inclusion_of(:currency).in_array(%w[€ $])
+  end
+
   it 'name length min max' do
     should validate_length_of(:name).is_at_least(5)
     should validate_length_of(:name).is_at_most(80)

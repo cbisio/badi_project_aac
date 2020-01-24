@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_150904) do
+ActiveRecord::Schema.define(version: 2020_01_24_132315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "extras", force: :cascade do |t|
     t.string "name"
@@ -52,6 +58,9 @@ ActiveRecord::Schema.define(version: 2020_01_23_150904) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.string "address"
+    t.bigint "city_id", null: false
+    t.string "currency"
+    t.index ["city_id"], name: "index_rooms_on_city_id"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
@@ -65,5 +74,6 @@ ActiveRecord::Schema.define(version: 2020_01_23_150904) do
   end
 
   add_foreign_key "photos", "rooms"
+  add_foreign_key "rooms", "cities"
   add_foreign_key "rooms", "users"
 end
