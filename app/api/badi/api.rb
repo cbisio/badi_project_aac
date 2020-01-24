@@ -4,6 +4,6 @@ module Badi
     content_type :json, 'application/json; charset=utf-8'
 
     mount Badi::Health
-    # mount Badi::APIv1
+    mount Badi::V1::Base
   end
 end
