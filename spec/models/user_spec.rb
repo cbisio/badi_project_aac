@@ -26,4 +26,3 @@ RSpec.describe User, type: :model do
     should validate_length_of(:about).is_at_most(200)
   end
 end
-
