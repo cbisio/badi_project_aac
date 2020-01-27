@@ -46,7 +46,7 @@ RSpec.describe 'Room Api request', type: :request do
 
     context 'when there are no rooms' do
       before { get "/V1/roomsBounds?city=NoExists&y0=0&y1=0&x0=0&x1=0"}
-      
+
       it 'return statuscode = 404' do
         expect(response).to have_http_status(404)
       end
