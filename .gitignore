@@ -21,7 +21,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# Ignore DB 
+# Ignore DB
+.env
 .env.*
 
 # Ignore coverage folder
