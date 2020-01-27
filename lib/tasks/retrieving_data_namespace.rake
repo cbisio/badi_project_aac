@@ -75,6 +75,11 @@ namespace :retrieving_data_namespace do
         @num = @num + 1
       end
 
+      2.times do
+        @extra = Extra.find(rand(1..10))
+        @room.extras << @extra unless @room.extras.include?(@extra)
+      end
+
     end
     
   end
