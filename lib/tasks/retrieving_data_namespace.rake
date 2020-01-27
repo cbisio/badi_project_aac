@@ -28,9 +28,10 @@ namespace :retrieving_data_namespace do
       @longitude = body[item]["longitude"].to_f
       @bills_included = (body[item]["prices_attributes"][0]["bills_included"] == "true")
       @deposit = body[item]["prices_attributes"][0]["deposit"].to_i
-      @address = "Calle Piruleta 35"
-      @room_size = 0
-      @property_size = 0
+      @results = Geocoder.search([@latitude, @longitude])
+      @address = @results.first.address
+      @room_size = rand(5..15)
+      @property_size = rand(50..120)
       @owner_name = body[item]["tenants"][0]["first_name"] << " " << body[item]["tenants"][0]["last_name"]
       @owner_birth = body[item]["tenants"][0]["birth_date"] 
       if body[item]["tenants"][0]["biological_sex"] == 1
