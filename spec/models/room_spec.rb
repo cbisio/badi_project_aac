@@ -12,8 +12,7 @@ RSpec.describe Room, type: :model do
 
   it 'validate presence of required fields ' do
     should validate_presence_of(:name)
-    should validate_presence_of(:price)
-    should validate_presence_of(:description)
+    should validate_presence_of(:price) 
     should validate_presence_of(:latitude)
     should validate_presence_of(:longitude)
     should validate_presence_of(:address)
@@ -33,11 +32,6 @@ RSpec.describe Room, type: :model do
   it 'address length min max' do
     should validate_length_of(:address).is_at_least(10)
     should validate_length_of(:address).is_at_most(100)
-  end
-
-  it 'description length min max' do
-    should validate_length_of(:description).is_at_least(10)
-    should validate_length_of(:description).is_at_most(200)
   end
 
   it 'price number values: min max' do
