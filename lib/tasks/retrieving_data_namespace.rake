@@ -3,7 +3,7 @@
 namespace :retrieving_data_namespace do
   desc "TODO"
   task :retrieving_data, [:page] => :environment  do |t, args|
-   
+    Geocoder.configure(ip_lookup: :ipinfo_io)
     query = { 
       "page"     => args.page,
       "bounds"     => {"ne":{"lat":41.4695761,"lng":2.2280099},"sw":{"lat":41.320004,"lng":2.0695258}}
@@ -46,8 +46,8 @@ namespace :retrieving_data_namespace do
         @owner_gender = "Female"
       elsif body[item]["tenants"][0]["biological_sex"] == 2
         @owner_gender = "Male"
-      else 
-        @owner_gender = "Others"
+      else
+        @owner_gender = "Other"
       end
       @owner_about = body[item]["tenants"][0]["small_bio"]
       
@@ -63,7 +63,8 @@ namespace :retrieving_data_namespace do
         :name => @name, :price => @price, :description => @description,
          :latitude => @latitude, :longitude => @longitude, :num_visits => 0, 
          :bills_included => @bills_included, :deposit => @deposit, :user_id => @user.id, 
-         :address => @address, :currency => @currency, :city_id => @city.id
+         :address => @address, :currency => @currency, :city_id => @city.id, 
+         :room_size => @room_size, :property_size => @property_size
       }
 
       @room = Room.create!(room_params)
