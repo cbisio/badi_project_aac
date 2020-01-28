@@ -14,6 +14,6 @@ RSpec.describe Photo, type: :model do
 
   it 'url length min max' do
     should validate_length_of(:url).is_at_least(5)
-    should validate_length_of(:url).is_at_most(80)
+    should validate_length_of(:url).is_at_most(120)
   end
 end
