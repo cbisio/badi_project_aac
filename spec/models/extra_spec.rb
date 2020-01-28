@@ -8,8 +8,12 @@ RSpec.describe Extra, type: :model do
   end
 
   it 'name length min max' do
-    should validate_length_of(:name).is_at_least(3)
+    should validate_length_of(:name).is_at_least(2)
     should validate_length_of(:name).is_at_most(160)
+  end
+
+  it 'uniqueness' do
+    should validate_uniqueness_of(:name)
   end
 
 end
