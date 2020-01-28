@@ -2,8 +2,10 @@ module Badi
   module V1
     class Base < Grape::API
       version 'V1', using: :path
-      # TODO: Mount classes to respond to api calls
+      include Badi::V1::ExceptionHandler
+
       mount Badi::V1::Search
+      mount Badi::V1::Rooms
     end
   end
 end

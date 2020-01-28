@@ -5,6 +5,5 @@ module Badi
 
     mount Badi::Health
     mount Badi::V1::Base
-    mount Badi::V1::Search
   end
 end
