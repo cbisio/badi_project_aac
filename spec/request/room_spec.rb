@@ -1,22 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe 'Room Api request', type: :request do
-  ## Arrange test data 
-  let!(:city){create(:city)}
-  let!(:user){create(:user)}
+  ## Arrange test data
+  let!(:city) { create(:city) }
+  let!(:user) { create(:user) }
   let!(:room) { create(:room, city_id: city.id,  user_id: user.id) }
 
   describe 'GET /V1/room/:id' do
     context 'when room exist' do
       before { get "/V1/room/#{room.id}" }
 
-      it 'return statuscode = 200' do 
+      it 'return statuscode = 200' do
         expect(response).to have_http_status(200)
       end
 
       it 'returns room with same id' do
-        payload = JSON.parse(response.body) 
+        payload = JSON.parse(response.body)
         expect(payload["id"]).to eq(room.id)
+      end
+
+      it 'returnsnum_visits + 1' do
+        payload = JSON.parse(response.body)
+        expect(payload["num_visits"]).to eq(room.num_visits + 1)
       end
     end
 
@@ -39,7 +44,7 @@ RSpec.describe 'Room Api request', type: :request do
       end
 
       it 'return not empty' do 
-        payload = JSON.parse(response.body) 
+        payload = JSON.parse(response.body)
         expect(payload).not_to be_empty
       end
     end
@@ -51,8 +56,8 @@ RSpec.describe 'Room Api request', type: :request do
         expect(response).to have_http_status(404)
       end
 
-      it 'return empty response' do 
-        payload = JSON.parse(response.body) 
+      it 'return empty response' do
+        payload = JSON.parse(response.body)
         expect(payload["error"]).not_to be_empty
       end
     end
