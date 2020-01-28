@@ -54,7 +54,7 @@
 
       @user = User.find_or_create_by!(user_params)
 
-      @city = City.create!(:name => @city_name)
+      @city = City.find_or_create_by!(:name => @city_name)
 
       room_params = {
         :name => @name, :price => @price, :description => @description,
