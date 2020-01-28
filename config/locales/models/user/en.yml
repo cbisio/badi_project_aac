@@ -33,9 +33,6 @@ en:
   name:
     short: "field: %{minchar} characters is the minimum allowed"
     long: "field: %{maxchar} characters is the maximum allowed"
-  about:
-    short: "field: %{minchar} characters is the minimum allowed"
-    long: "field: %{maxchar} characters is the maximum allowed"
   birth_date: "field: is not valid."
   gender: "field: is not valid."
     
