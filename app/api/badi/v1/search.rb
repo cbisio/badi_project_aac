@@ -1,26 +1,14 @@
 module Badi
   module V1
     class Search < Grape::API
-      version 'V1', using: :path
+      params do
+        requires :text, type: String, desc: 'Should have a text query param'
+      end
       desc 'Returns the search of the service'
-      get '/search/:text' do
-
-        query = {
-          access_token: ENV['MAPBOX_API_KEY'],
-          country: 'es',
-          limit: 10,
-          types: 'country,region,postcode,district,place,locality,neighborhood,address'
-        }
-
-        response = HTTParty.get(
-          "https://api.mapbox.com/geocoding/v5/mapbox.places/#{params[:text]}.json",
-          query: query
-        )
-
+      get '/search' do
+        # Send response
         status :ok
-        JSON.parse(response.body)
-
-
+        GeocodingService.call(params[:text])
       end
     end
   end
