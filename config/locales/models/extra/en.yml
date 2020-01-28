@@ -33,4 +33,5 @@ en:
   name:
     short: "field: %{minchar} characters is the minimum allowed"
     long: "field: %{maxchar} characters is the maximum allowed"
+    uniqueness: "This field has to be unique"
     
