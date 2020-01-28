@@ -1,8 +1,5 @@
 
-
-namespace :retrieving_data_namespace do
-  desc "TODO"
-  task :retrieving_data, [:page] => :environment  do |t, args|
+  task :retrieve_data, [:page] => :environment  do |t, args|
     Geocoder.configure(ip_lookup: :ipinfo_io)
     query = { 
       "page"     => args.page,
@@ -81,6 +78,5 @@ namespace :retrieving_data_namespace do
       end
 
     end
-    
   end
-end
+
