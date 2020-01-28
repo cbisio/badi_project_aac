@@ -24,9 +24,12 @@
 # Ignore DB
 .env
 .env.*
+.env
 
 # Ignore coverage folder
 coverage
 
 Gemfile.lock
+
+
 
