@@ -59,7 +59,8 @@ namespace :retrieving_data_namespace do
       
       @num = 0
       body[item]["pictures"].each do |picture|
-        Photo.create!(:url => picture["url"], :order => @num, :room_id => @room.id)
+        @photo = Photo.create!(:order => @num, :room_id => @room.id)
+        @photo.url.attach(:url => picture["url"])
         @num = @num + 1
       end
     end
