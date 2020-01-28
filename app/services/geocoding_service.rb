@@ -1,4 +1,7 @@
 class GeocodingService
+
+  class ThirdPartyError < StandardError; end
+
   attr_reader :text
 
   def self.call(*args)
@@ -17,7 +20,7 @@ class GeocodingService
   def call
     response = request_geocoding_third_api_service
 
-    raise Badi::V1::ExceptionHandler::GeocodingServiceError 'There was en error accessing to geocoding service' unless response.code == 200
+    raise GeocodingService::ThirdPartyError 'There was en error accessing to geocoding service' unless response.code == 200
 
     json = JSON.parse(response.body)
 
