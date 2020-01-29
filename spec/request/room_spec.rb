@@ -34,10 +34,10 @@ RSpec.describe 'Room Api request', type: :request do
     end
   end
 
-  describe 'GET /V1/roomsBounds?city=Barcelona&x0=1.0&y0=0.0&x1=151&y1=100.0' do
+  describe 'GET /V1/rooms?city=Barcelona&topleft_lat=1.0&btmright_lat=0.0&topleft_long=151&btmright_long=100.0' do
 
     context 'when there are rooms ' do
-      before { get "/V1/roomsBounds?city=#{city.name}&y0=#{room.latitude-1}&y1=#{room.latitude+1}&x0=#{room.longitude-1}&x1=#{room.longitude+1}"}
+      before { get "/V1/rooms?city=#{city.name}&topleft_lat=#{room.latitude-1}&btmright_lat=#{room.latitude+1}&topleft_long=#{room.longitude-1}&btmright_long=#{room.longitude+1}"}
 
       it 'return statuscode = 200' do 
         expect(response).to have_http_status(200)
@@ -50,7 +50,7 @@ RSpec.describe 'Room Api request', type: :request do
     end
 
     context 'when there are no rooms' do
-      before { get "/V1/roomsBounds?city=NoExists&y0=0&y1=0&x0=0&x1=0"}
+      before { get "/V1/rooms?city=NoExists&topleft_lat=0&btmright_lat=0&topleft_long=0&btmright_long=0"}
 
       it 'return statuscode = 404' do
         expect(response).to have_http_status(404)
