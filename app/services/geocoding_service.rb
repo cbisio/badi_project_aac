@@ -1,7 +1,4 @@
-class GeocodingService
-
-  class ThirdPartyError < StandardError; end
-
+class GeocodingService < ObjectService
   attr_reader :text
 
   def self.call(*args)
@@ -18,14 +15,18 @@ class GeocodingService
   end
 
   def call
+    result = nil
+
     response = request_geocoding_third_api_service
 
-    raise GeocodingService::ThirdPartyError 'There was en error accessing to geocoding service' unless response.code == 200
+    if response.code == 200
+      json = JSON.parse(response.body)
+      result = Success.new(clean_locations_response(json))
+    else
+      result = Error.new(I18n.t('geocoding_service.errors.third_party_error'))
+    end
 
-    json = JSON.parse(response.body)
-
-    # Return cleaned locations
-    clean_locations_response(json)
+    result
   end
 
   private

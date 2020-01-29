@@ -1,0 +1,4 @@
+en:
+  geocoding_service: 
+    errors:
+      third_party_error: "There was a request error to the third party API geocoding service."
