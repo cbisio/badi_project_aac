@@ -72,11 +72,10 @@
         @num = @num + 1
       end
 
-      2.times do
-        @extra = Extra.find(rand(1..10))
-        @room.extras << @extra unless @room.extras.include?(@extra)
-      end
-
+        @extra = Extra.all.sample(2)
+        @room.extras << @extra[0]
+        @room.extras << @extra[1]
+     
     end
   end
 
