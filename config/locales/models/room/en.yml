@@ -30,14 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  name:
-    short: "field: %{minchar} characters is the minimum allowed"
-    long: "field: %{maxchar} characters is the maximum allowed"
-  address:
-    short: "field: %{minchar} characters is the minimum allowed"
-    long: "field: %{maxchar} characters is the maximum allowed"
-  latitude: "field: is not valid. Out of range"
-  longitude: "field: is not valid. Out of range"
-  price: "field: is not valid. The quantity must be between 0 and 10000"
-  currency: "field: is not valid. We only support euros (€) or dollars ($)"
+  activerecord:
+    errors:
+      messages:
+        too_short: "field: %{count} characters is the minimum allowed"
+        too_long: "field: %{count} characters is the maximum allowed"
+        required: "field: is required"
+        not_a_number: "field: is not valid. Must be a number"
+        less_than: "field: is not valid. Must be less than %{count}"
+        greater_than: "field: is not valid. Must be greater than %{count}"
+        inclusion: "field: is not valid. We only support euros (€) or dollars ($)"
     

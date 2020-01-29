@@ -55,3 +55,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Httparty gem to create http requests
 gem 'httparty'
+
+gem 'geocoder'
