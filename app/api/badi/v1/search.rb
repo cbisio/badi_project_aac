@@ -2,7 +2,7 @@ module Badi
   module V1
     class Search < Grape::API
       params do
-        requires :text, type: String, desc: 'Should have a text query param'
+        requires :text, type: String, message: I18n.t('api.search.errors.text_param_required')
       end
       desc 'Returns the search of the service'
       get '/search' do
