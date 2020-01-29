@@ -6,9 +6,13 @@ module Badi
       end
       desc 'Returns the search of the service'
       get '/search' do
-        # Send response
-        status :ok
-        GeocodingService.call(params[:text])
+        result = GeocodingService.call(params[:text])
+        if result.success?
+          status :ok
+          result.data
+        else
+          raise Badi::V1::ExceptionHandler::GeocodingServiceError, result.error
+        end
       end
     end
   end

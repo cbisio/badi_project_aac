@@ -4,6 +4,7 @@ module Badi
       extend ActiveSupport::Concern
 
       class RoomNotFound < StandardError; end
+      class GeocodingServiceError < StandardError; end
 
       included do
 
@@ -19,7 +20,7 @@ module Badi
           error!(e.message, 422)
         end
 
-        rescue_from GeocodingService::ThirdPartyError do |e|
+        rescue_from Badi::V1::ExceptionHandler::GeocodingServiceError do |e|
           error!(e.message, 424)
         end
 
