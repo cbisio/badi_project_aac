@@ -1,0 +1,5 @@
+en:
+  api:
+    search:
+      errors:
+        text_param_required: "query param is required to search a location."
