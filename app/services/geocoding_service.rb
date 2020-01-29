@@ -56,16 +56,10 @@ class GeocodingService < ObjectService
         {
           name: result['address']['freeformAddress'],
           city: city,
-          bbox: {
-            topLeftPoint: {
-              lat: result['viewport']['topLeftPoint']['lat'],
-              lon: result['viewport']['topLeftPoint']['lon']
-            },
-            btmRightPoint: {
-              lat: result['viewport']['btmRightPoint']['lat'],
-              lon: result['viewport']['btmRightPoint']['lon']
-            }
-          }
+          topleft_lat: result['viewport']['topLeftPoint']['lat'],
+          topleft_lon: result['viewport']['topLeftPoint']['lon'],
+          btmright_lat: result['viewport']['btmRightPoint']['lat'],
+          btmright_lon: result['viewport']['btmRightPoint']['lon']
         }
       )
     }
