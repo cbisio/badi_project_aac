@@ -30,8 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  url:
-    short: "field: %{minchar} characters is the minimum allowed"
-    long: "field: %{maxchar} characters is the maximum allowed"
-  order: "field: must be a number greater than 0"
+  activerecord:
+    errors:
+      messages:
+        too_short: "field: %{count} characters is the minimum allowed"
+        too_long: "field: %{count} characters is the maximum allowed"
+        not_a_number: "field: must be a number greater than 0"
+        required: "field: is required"
     
