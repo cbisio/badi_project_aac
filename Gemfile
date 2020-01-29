@@ -29,6 +29,7 @@ group :development, :test do
   gem 'pry-rails'
   # Enforces Rails best practices and coding conventions.
   gem 'rubocop-rails', require: false
+  gem 'brakeman'
 end
 
 group :test do
@@ -36,6 +37,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'brakeman'
 end
 
 group :development do
