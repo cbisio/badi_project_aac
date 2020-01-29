@@ -22,9 +22,8 @@
 /config/master.key
 
 # Ignore DB
-.env
+
 .env.*
-.env
 
 # Ignore coverage folder
 coverage
