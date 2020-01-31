@@ -23,7 +23,7 @@ class GeocodingService < ObjectService
       json = JSON.parse(response.body)
       result = Success.new(clean_locations_response(json))
     else
-      result = Error.new(I18n.t('geocoding_service.errors.third_party_error'))
+      result = Error.new(I18n.t('geocoding_service.errors.third_party_error'), 422)
     end
 
     result

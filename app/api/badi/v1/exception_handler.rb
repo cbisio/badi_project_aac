@@ -4,7 +4,18 @@ module Badi
       extend ActiveSupport::Concern
 
       class RoomNotFound < StandardError; end
-      class GeocodingServiceError < StandardError; end
+      class GeocodingServiceError < StandardError
+        attr_reader :status_code
+        def initialize(status_code)
+          @status_code = status_code
+        end
+      end
+      class SearchRoomsServiceError < StandardError
+        attr_reader :status_code
+        def initialize(status_code)
+          @status_code = status_code
+        end
+      end
 
       included do
 
@@ -21,9 +32,12 @@ module Badi
         end
 
         rescue_from Badi::V1::ExceptionHandler::GeocodingServiceError do |e|
-          error!(e.message, 424)
+          error!(e.message, e.status_code)
         end
 
+        rescue_from Badi::V1::ExceptionHandler::SearchRoomsServiceError do |e|
+          error!(e.message, e.status_code)
+        end
       end
     end
   end
