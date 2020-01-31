@@ -1,0 +1,4 @@
+en:
+  search_rooms_service: 
+    errors:
+      no_rooms_found: "Elasticsearch could not find results according to the specified search parameters."

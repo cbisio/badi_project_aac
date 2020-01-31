@@ -1,0 +1,6 @@
+en:
+  api:
+    rooms:
+      errors:
+        id_param_required: "param is required to get a specific room."
+        lat_lon_required: "query param is required to look for a room inside specific bounds."

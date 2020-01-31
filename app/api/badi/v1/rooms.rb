@@ -1,7 +1,10 @@
 module Badi
   module V1
     class Rooms < Grape::API
-
+      # GET /room/{id}
+      params do
+        requires :id, type: Integer, message: I18n.t('api.rooms.errors.id_param_required')
+      end
       get '/room/:id' do
         begin
           @room = Room.find(@params[:id])
@@ -12,18 +15,36 @@ module Badi
         end
       end
 
+      # GET /rooms
+      params do
+        requires :topleft_lat, type: String, message: I18n.t('api.rooms.errors.lat_lon_required')
+        requires :topleft_lon, type: String, message: I18n.t('api.rooms.errors.lat_lon_required')
+        requires :btmright_lat, type: String, message: I18n.t('api.rooms.errors.lat_lon_required')
+        requires :btmright_lon, type: String, message: I18n.t('api.rooms.errors.lat_lon_required')
+      end
       get '/rooms' do
-        begin
-          @rooms = Room.joins(:city).where(cities: { name: @params[:city]}).
-          where("latitude >=? and latitude <= ? and longitude >= ? and longitude <= ?",@params[:topleft_lat],@params[:btmright_lat],@params[:topleft_long],@params[:btmright_long])
+        # Optional query params
+        params[:city] ? city = params[:city] : city = nil
+        params[:page] ? page = params[:page] : page = nil
+        params[:size] ? size = params[:size] : size = nil
 
-          if @rooms.size >0
-            present @rooms, with: Badi::V1::Entities::Room
-          else
-            raise Badi::V1::ExceptionHandler::RoomNotFound, 'Not rooms have been found in this bounds'
-          end
-        rescue
-          raise Badi::V1::ExceptionHandler::RoomNotFound, 'Not rooms have been found in this bounds'
+        opts = {
+          city: city,
+          page: page,
+          size: size
+        }
+
+        # Wrapping mandatory query params
+        top_left_point = { top_left_lat: params[:topleft_lat], top_left_lon: params[:topleft_lon] }
+        bottom_right_point = { bottom_right_lat: params[:btmright_lat], bottom_right_lon: params[:btmright_lon] }
+
+        result = SearchRoomsService.call(top_left_point, bottom_right_point, opts)
+
+        if result.success?
+          status :ok
+          present result.data, with: Badi::V1::Entities::Rooms
+        else
+          raise Badi::V1::ExceptionHandler::SearchRoomsServiceError.new(result.error_code), result.error_message
         end
       end
     end
