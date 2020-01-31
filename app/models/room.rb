@@ -3,6 +3,7 @@ class Room < ApplicationRecord
   belongs_to :city
   has_many :photos
   has_and_belongs_to_many :extras
+  has_many :room_views
 
   validates :name, length: { minimum: 5, maximum: 80}, presence: true
   validates :address, length: { minimum: 10, maximum: 200}, presence: true

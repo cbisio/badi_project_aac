@@ -5,10 +5,10 @@ module Badi
       get '/room/:id' do
         begin
           @room = Room.find(@params[:id])
-          present @room, with: Badi::V1::Entities::Room
           @ip = env['REMOTE_ADDR']
-          @ip_room = RoomView.find_or_create_by!(:room_id => @room.id, :ip => @ip)
-          @ip_room.update_counter()
+          @room_view = @room.room_views.find_or_create_by!(:ip => @ip)
+          @room_view.update_counter
+          present @room, with: Badi::V1::Entities::Room
         rescue
           raise Badi::V1::ExceptionHandler::RoomNotFound, 'This room could not be found.'
         end

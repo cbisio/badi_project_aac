@@ -6,6 +6,7 @@ RSpec.describe 'Room Api request', type: :request do
   let!(:user) { create(:user) }
   let!(:room) { create(:room, city_id: city.id,  user_id: user.id) }
 
+
   describe 'GET /V1/room/:id' do
     context 'when room exist' do
       before { get "/V1/room/#{room.id}" }
@@ -21,6 +22,9 @@ RSpec.describe 'Room Api request', type: :request do
 
       it 'returns num_visits + 1' do
         payload = JSON.parse(response.body)
+        expect(RoomView.one?).to eq(true)
+        room.reload
+        p room
         expect(payload["num_visits"]).to eq(1)
       end
     end
