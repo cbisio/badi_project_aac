@@ -7,13 +7,8 @@ module Badi
           @room = Room.find(@params[:id])
           present @room, with: Badi::V1::Entities::Room
           @ip = env['REMOTE_ADDR']
-          @ip_room = IpRoom.find_or_create_by!(:room_id => @room.id, :ip => @ip)
-          if(@ip_room.updated_at < Time.now - 86400)
-            @ip_room.update_attribute(:updated_at, Time.now)
-            @room.update_attribute(:num_visits, @room.num_visits + 1)
-          elsif (@ip_room.updated_at > Time.now - 5)
-            @room.update_attribute(:num_visits, @room.num_visits + 1)
-          end
+          @ip_room = RoomView.find_or_create_by!(:room_id => @room.id, :ip => @ip)
+          @ip_room.update_counter()
         rescue
           raise Badi::V1::ExceptionHandler::RoomNotFound, 'This room could not be found.'
         end

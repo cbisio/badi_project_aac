@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe IpRoom, type: :model do
+RSpec.describe RoomView, type: :model do
   it { should belong_to(:room) }
 
   it 'validate presence of required fields ' do

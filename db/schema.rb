@@ -13,7 +13,9 @@
 ActiveRecord::Schema.define(version: 2020_01_30_120849) do
 
   # These are extensions that must be enabled in order to support this database
+
   enable_extension "plpgsql"
+
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
@@ -34,14 +36,6 @@ ActiveRecord::Schema.define(version: 2020_01_30_120849) do
     t.index ["room_id", "extra_id"], name: "index_extras_rooms_on_room_id_and_extra_id"
   end
 
-  create_table "ip_rooms", force: :cascade do |t|
-    t.string "ip"
-    t.bigint "room_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_id"], name: "index_ip_rooms_on_room_id"
-  end
-
   create_table "photos", force: :cascade do |t|
     t.string "url"
     t.integer "order"
@@ -49,6 +43,14 @@ ActiveRecord::Schema.define(version: 2020_01_30_120849) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "room_id", null: false
     t.index ["room_id"], name: "index_photos_on_room_id"
+  end
+
+  create_table "room_views", force: :cascade do |t|
+    t.string "ip"
+    t.bigint "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_room_views_on_room_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -81,8 +83,8 @@ ActiveRecord::Schema.define(version: 2020_01_30_120849) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "ip_rooms", "rooms"
   add_foreign_key "photos", "rooms"
+  add_foreign_key "room_views", "rooms"
   add_foreign_key "rooms", "cities"
   add_foreign_key "rooms", "users"
 end
