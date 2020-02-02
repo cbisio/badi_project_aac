@@ -78,6 +78,7 @@
       }
 
       @room = Room.create!(room_params)
+      GeoServicesNearRoom.call(@room.id)
       
       @num = 1
       body[item]["pictures"].each do |picture|
