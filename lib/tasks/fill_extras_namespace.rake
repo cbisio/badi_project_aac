@@ -18,4 +18,5 @@
     @extras_name.each do |extra|
       Extra.create!(:name => extra)
     end
+
   end
