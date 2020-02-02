@@ -1,5 +1,11 @@
 
   task :retrieve_data, [:page, :city_letter] => :environment  do |t, args|
+
+
+    if Extra.any? == false
+      Rake::Task["fill_extras"].invoke
+    end
+
     Geocoder.configure(ip_lookup: :ipinfo_io)
 
     if args.city_letter == 'M' 

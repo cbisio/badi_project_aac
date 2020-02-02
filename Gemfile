@@ -61,3 +61,7 @@ gem 'httparty'
 gem 'geocoder'
 
 gem 'wdm'
+
+# Elastic search gems
+gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: 'master'
+gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: 'master'
