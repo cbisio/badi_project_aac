@@ -15,7 +15,7 @@ module Badi
         expose :num_visits
         expose :created_at
         expose :updated_at
-        expose :user
+        expose :owner
         expose :address
         expose :city
         expose :currency

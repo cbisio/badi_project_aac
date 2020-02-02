@@ -1,5 +1,5 @@
 class Room < ApplicationRecord
-  belongs_to :user
+  belongs_to :owner, class_name: "User", foreign_key: "user_id"
   belongs_to :city
   has_many :photos
   has_and_belongs_to_many :extras
