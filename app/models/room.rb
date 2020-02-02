@@ -24,6 +24,7 @@ class Room < ApplicationRecord
   belongs_to :city
   has_many :photos
   has_and_belongs_to_many :extras
+  has_one :room_location_service
 
   # Validations
   validates :name, length: { minimum: 5, maximum: 80}, presence: true
