@@ -1,6 +1,7 @@
 require 'elasticsearch/model'
 
 class Room < ApplicationRecord
+<<<<<<< HEAD
   # Elastic Search
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
@@ -25,6 +26,12 @@ class Room < ApplicationRecord
   has_many :photos
   has_and_belongs_to_many :extras
   has_one :room_location_service
+=======
+  belongs_to :owner, class_name: "User", foreign_key: "user_id"
+  belongs_to :city
+  has_many :photos
+  has_and_belongs_to_many :extras
+>>>>>>> feat/ip
   has_many :room_views
 
   # Validations

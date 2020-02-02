@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_02_01_132458) do
 
   # These are extensions that must be enabled in order to support this database
@@ -30,12 +31,19 @@ ActiveRecord::Schema.define(version: 2020_02_01_132458) do
   enable_extension "pgcrypto"
   enable_extension "pgrowlocks"
   enable_extension "pgstattuple"
+=======
+ActiveRecord::Schema.define(version: 2020_01_30_120849) do
+
+  # These are extensions that must be enabled in order to support this database
+
+>>>>>>> feat/ip
   enable_extension "plpgsql"
   enable_extension "plv8"
   enable_extension "tablefunc"
   enable_extension "unaccent"
   enable_extension "uuid-ossp"
   enable_extension "xml2"
+
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
@@ -65,6 +73,7 @@ ActiveRecord::Schema.define(version: 2020_02_01_132458) do
     t.index ["room_id"], name: "index_photos_on_room_id"
   end
 
+<<<<<<< HEAD
   create_table "room_location_services", force: :cascade do |t|
     t.integer "health"
     t.integer "leisure"
@@ -77,6 +86,8 @@ ActiveRecord::Schema.define(version: 2020_02_01_132458) do
     t.index ["room_id"], name: "index_room_location_services_on_room_id"
   end
 
+=======
+>>>>>>> feat/ip
   create_table "room_views", force: :cascade do |t|
     t.string "ip"
     t.bigint "room_id", null: false
@@ -116,7 +127,10 @@ ActiveRecord::Schema.define(version: 2020_02_01_132458) do
   end
 
   add_foreign_key "photos", "rooms"
+<<<<<<< HEAD
   add_foreign_key "room_location_services", "rooms"
+=======
+>>>>>>> feat/ip
   add_foreign_key "room_views", "rooms"
   add_foreign_key "rooms", "cities"
   add_foreign_key "rooms", "users"
