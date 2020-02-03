@@ -22,6 +22,7 @@ RSpec.describe 'Room Api request', type: :request do
 
       it 'returnsnum_visits + 1' do
         payload = JSON.parse(response.body)
+        expect(RoomView.one?).to eq(true)
         expect(payload["num_visits"]).to eq(room.num_visits + 1)
       end
     end

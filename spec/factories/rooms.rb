@@ -9,7 +9,7 @@ FactoryBot.define do
     description { "description testing" }
     latitude {1}
     longitude {1}
-    num_visits {1}
+    num_visits {0}
     created_at {'2019-10-10'}
     updated_at {'2019-10-10'}
     user_id {user_id}

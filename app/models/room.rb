@@ -20,11 +20,12 @@ class Room < ApplicationRecord
   end
 
   # Associations
-  belongs_to :user
+  belongs_to :owner, class_name: "User", foreign_key: "user_id"
   belongs_to :city
   has_many :photos
   has_and_belongs_to_many :extras
   has_one :room_location_service
+  has_many :room_views
 
   # Validations
   validates :name, length: { minimum: 5, maximum: 80}, presence: true
