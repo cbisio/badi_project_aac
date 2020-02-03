@@ -1,9 +1,9 @@
 class ObjectService
   class Error
-    attr_reader :error, :code
+    attr_reader :error_message, :error_code
     def initialize(error = nil, code = nil)
-      @error = error
-      @code = code
+      @error_message = error
+      @error_code = code
     end
 
     def success?

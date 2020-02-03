@@ -11,7 +11,7 @@ module Badi
           status :ok
           result.data
         else
-          raise Badi::V1::ExceptionHandler::GeocodingServiceError, result.error
+          raise Badi::V1::ExceptionHandler::GeocodingServiceError.new(result.error_code), result.error_message
         end
       end
     end

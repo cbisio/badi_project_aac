@@ -8,6 +8,8 @@ RSpec.describe Room, type: :model do
 
   it { should have_many(:photos) }
 
+  it { should have_one(:room_location_service) }
+
   it { should have_and_belong_to_many(:extras) }
 
   it 'validate presence of required fields ' do
@@ -38,7 +40,7 @@ RSpec.describe Room, type: :model do
     should validate_numericality_of(:price).is_greater_than(10)
     should validate_numericality_of(:price).is_less_than(10000)
   end
-  
+
   it 'latitude number values: min max' do
     should validate_numericality_of(:latitude).is_greater_than(-90)
     should validate_numericality_of(:latitude).is_less_than(90)
