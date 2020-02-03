@@ -3,10 +3,16 @@ module Badi
     class Search < Grape::API
       params do
         requires :text, type: String, message: I18n.t('api.search.errors.text_param_required')
+        optional :limit, type: Integer
       end
       desc 'Returns the search of the service'
       get '/search' do
-        result = GeocodingService.call(params[:text])
+        # Optional query params
+        opts = {}
+        opts[:limit] = params[:limit] if params[:limit]
+
+        result = GeocodingService.call(params[:text], opts)
+
         if result.success?
           status :ok
           result.data

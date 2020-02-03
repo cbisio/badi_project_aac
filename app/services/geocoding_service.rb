@@ -35,7 +35,7 @@ class GeocodingService < ObjectService
     query = {
       key: ENV['TOMTOM_API_KEY'],
       countrySet: @countries,
-      limit: @search_limit,
+      limit: @limit,
       language: @language,
       idxSet: @search_types,
       typeahead: @predictive_mode
