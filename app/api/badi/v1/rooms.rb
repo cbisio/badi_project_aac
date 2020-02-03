@@ -25,18 +25,16 @@ module Badi
         requires :topleft_lon, type: String, message: I18n.t('api.rooms.errors.lat_lon_required')
         requires :btmright_lat, type: String, message: I18n.t('api.rooms.errors.lat_lon_required')
         requires :btmright_lon, type: String, message: I18n.t('api.rooms.errors.lat_lon_required')
+        optional :city, type: String
+        optional :page, type: String
+        optional :size, type: String
       end
       get '/rooms' do
         # Optional query params
-        params[:city] ? city = params[:city] : city = nil
-        params[:page] ? page = params[:page] : page = nil
-        params[:size] ? size = params[:size] : size = nil
-
-        opts = {
-          city: city,
-          page: page,
-          size: size
-        }
+        opts = {}
+        opts[:city] = params[:city] if params[:city]
+        opts[:page] = params[:page] if params[:page]
+        opts[:size] = params[:size] if params[:size]
 
         # Wrapping mandatory query params
         top_left_point = { top_left_lat: params[:topleft_lat], top_left_lon: params[:topleft_lon] }

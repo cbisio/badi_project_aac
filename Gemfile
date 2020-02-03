@@ -60,8 +60,6 @@ gem 'httparty'
 
 gem 'geocoder'
 
-gem 'wdm'
-
 #CRON
 gem 'whenever', require: false
 
