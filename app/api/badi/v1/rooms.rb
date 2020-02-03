@@ -14,8 +14,8 @@ module Badi
           end
           @room_view = @room.room_views.create!(:ip => @ip)
           present @room, with: Badi::V1::Entities::Room
-        rescue
-          raise Badi::V1::ExceptionHandler::RoomNotFound, 'This room could not be found.'
+        rescue ActiveRecord::RecordNotFound => e
+          raise Badi::V1::ExceptionHandler::RoomNotFound, e.message
         end
       end
 
