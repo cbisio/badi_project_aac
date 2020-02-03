@@ -23,7 +23,7 @@ RSpec.describe SearchRoomsService do
 
   let(:opts_with_pagination) {
     {
-      city: "Barcelona",
+      city: 'Barcelona',
       page: 10,
       size: 2
     }
@@ -31,7 +31,14 @@ RSpec.describe SearchRoomsService do
 
   let(:opts_without_pagination) {
     {
-      city: "Barcelona"
+      city: 'Barcelona'
+    }
+  }
+
+  let(:opts_wit_sort_by) {
+    {
+      city: 'Barcelona',
+      sort_by: 'food'
     }
   }
 
@@ -108,20 +115,6 @@ RSpec.describe SearchRoomsService do
   end
 
   context 'when sort_by has been specified' do
-    let(:search_room_service) { SearchRoomsService.new(
-      {
-        top_left_lat: 41.5,
-        top_left_lon: 2.0
-      },
-      {
-        bottom_right_lat: 41.3,
-        bottom_right_lon: 2.3
-      },
-      {
-        city: 'Barcelona',
-        sort_by: 'food'
-      }
-    )}
     it 'searches with the correct query' do
       results = double('Elastic Search results', results: ["ROOM1", "ROOM2"])
       expect(Room).to receive(:search).with(
@@ -150,7 +143,7 @@ RSpec.describe SearchRoomsService do
         sort: [{ 'room_location_service.food': { order: 'desc' } }]
       }).and_return(results)
 
-      search_room_service.call
+      SearchRoomsService.call(top_left_point, bottom_right_point, opts_wit_sort_by)
     end
   end
 
@@ -175,27 +168,30 @@ RSpec.describe SearchRoomsService do
   context 'when no city name is provided' do
     it 'searches rooms with correct query' do
       results = double("Elastic Search results", results: ["Room1", "Room 2"])
-      expect(Room).to receive(:search).with(query:
-      {
-        bool: {
-          must: [
-          {
-            geo_bounding_box: {
-              location: {
-                top_left: {
-                  lat: 41.5,
-                  lon: 2.0
-                },
-                bottom_right: {
-                  lat: 41.3,
-                  lon: 2.3
+      expect(Room).to receive(:search).with(
+        {
+          query: {
+            bool: {
+              must: [
+              {
+                geo_bounding_box: {
+                  location: {
+                    top_left: {
+                      lat: 41.5,
+                      lon: 2.0
+                    },
+                    bottom_right: {
+                      lat: 41.3,
+                      lon: 2.3
+                    }
+                  }
                 }
               }
+              ]
             }
-          }
-          ]
-        }
-      }).and_return(results)
+          },
+          sort: []
+        }).and_return(results)
 
       expect(ObjectService::Success).to receive(:new)
 
