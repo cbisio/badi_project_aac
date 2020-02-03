@@ -60,6 +60,9 @@ gem 'httparty'
 
 gem 'geocoder'
 
+#CRON
+gem 'whenever', require: false
+
 # Elastic search gems
 gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: 'master'
 gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: 'master'

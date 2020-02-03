@@ -21,6 +21,7 @@ module Badi
         expose :currency
         expose :extras
         expose :photos
+        expose :room_location_service
       end
     end
   end
