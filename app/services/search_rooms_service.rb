@@ -13,37 +13,35 @@ class SearchRoomsService < ObjectService
     @city = opts[:city] || nil
     @page = opts[:page] || nil
     @size = opts[:size] || nil
+    @sort_by = opts[:sort_by] || nil
   end
 
   def call
     @search_definitions = {
-      query: {},
-      musts: []
+      query: {
+        bool: {
+          must: []
+        }
+      },
+      sort: []
     }
 
     # Geo bounding box will always be a required search constrain
     add_geo_bounding_box
 
     # Add city match only if needed
-    if should_match_city?
-      add_city_match
-    end
+    add_city_match if should_match_city?
 
-    # Define elastic search query
-    @search_definitions[:query] = {
-      bool: {
-        must: @search_definitions[:musts]
-      }
-    }
+    # Add pagination if needed
+    add_pagination if use_pagination?
 
-    # Return search with our without pagination
-    response = nil
-    if use_pagination?
-      response = Room.search(query: @search_definitions[:query], from: @page, size: @size).results
-    else
-      response = Room.search(query: @search_definitions[:query]).results
-    end
+    # Add sort by specifications if needed
+    add_sorting if use_sort_by?
 
+    # Search using elastic search and the defined search
+    response = Room.search(@search_definitions).results
+
+    # Check if there were results and if so send them. Send an error otherwise.
     if response.size > 0
       Success.new(clean_rooms_response(response))
     else
@@ -53,7 +51,7 @@ class SearchRoomsService < ObjectService
 
   private
   def add_geo_bounding_box
-    @search_definitions[:musts].push(
+    @search_definitions[:query][:bool][:must].push(
       geo_bounding_box: {
         location: {
           top_left: {
@@ -78,7 +76,7 @@ class SearchRoomsService < ObjectService
   end
 
   def add_city_match
-    @search_definitions[:musts].push(match: { 'city.name': @city })
+    @search_definitions[:query][:bool][:must].push(match: { 'city.name': @city })
   end
 
   def use_pagination?
@@ -87,6 +85,25 @@ class SearchRoomsService < ObjectService
     else
       false
     end
+  end
+
+  def add_pagination
+    @search_definitions[:from] = @page
+    @search_definitions[:size] = @size
+  end
+
+  def use_sort_by?
+    if @sort_by
+      true
+    else
+      false
+    end
+  end
+
+  def add_sorting
+    @search_definitions[:sort].push(
+      "room_location_service.#{@sort_by}": { 'order': 'desc' }
+    )
   end
 
   def clean_rooms_response(dirty_response)

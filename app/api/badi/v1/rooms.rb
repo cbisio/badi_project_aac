@@ -28,6 +28,7 @@ module Badi
         optional :city, type: String
         optional :page, type: String
         optional :size, type: String
+        optional :sort_by, type: String, values: ['health', 'leisure', 'transport', 'food', 'tourism']
       end
       get '/rooms' do
         # Optional query params
@@ -35,11 +36,13 @@ module Badi
         opts[:city] = params[:city] if params[:city]
         opts[:page] = params[:page] if params[:page]
         opts[:size] = params[:size] if params[:size]
+        opts[:sort_by] = params[:sort_by] if params[:sort_by]
 
         # Wrapping mandatory query params
         top_left_point = { top_left_lat: params[:topleft_lat], top_left_lon: params[:topleft_lon] }
         bottom_right_point = { bottom_right_lat: params[:btmright_lat], bottom_right_lon: params[:btmright_lon] }
 
+        # Call the SearchRoomsService and send response
         result = SearchRoomsService.call(top_left_point, bottom_right_point, opts)
 
         if result.success?
