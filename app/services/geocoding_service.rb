@@ -45,7 +45,7 @@ class GeocodingService < ObjectService
   end
 
   def url
-    "https://api.tomtom.com/search/2/search/#{@text}.json"
+    URI.encode("https://api.tomtom.com/search/2/search/#{@text}.json")
   end
 
   def clean_locations_response(dirty_locations)
