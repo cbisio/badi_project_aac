@@ -42,9 +42,10 @@ RSpec.describe 'Room Api request', type: :request do
     let(:btm_right_lat) { 41.3 }
     let(:top_left_lon) { 2.0 }
     let(:btm_right_lon) { 2.3 }
-    let(:city_name) { "Barcelona" }
+    let(:city_name) { 'Barcelona' }
     let(:page) { 1 }
     let(:size) { 5 }
+    let(:sort_by) { 'food' }
 
     context "With results and pagination" do 
       before do
@@ -104,6 +105,38 @@ RSpec.describe 'Room Api request', type: :request do
 
       it 'returns statuscode = 404' do
         expect(response).to have_http_status(404)
+      end
+    end
+
+    context 'when sorting results' do
+      context 'if sort param is wrong' do
+        it 'returns a 422 if it is incorrect' do
+          get "/V1/rooms?city=#{city_name}&topleft_lat=#{top_left_lat}&btmright_lat=#{btm_right_lat}&topleft_lon=#{top_left_lon}&btmright_lon=#{btm_right_lon}&sort_by=abc"
+          expect(response).to have_http_status(422)
+        end
+      end
+
+      context 'if sort param is correct' do
+        it 'calls the searchRoomService with the sort param' do
+          ok = double("Search Rooms Results", "success?" => true, data: { rooms: Array.new(size) })
+          expect(SearchRoomsService).to receive(:call).with(
+            {
+              top_left_lat: top_left_lat.to_s,
+              top_left_lon: top_left_lon.to_s
+            },
+            {
+              bottom_right_lat: btm_right_lat.to_s,
+              bottom_right_lon: btm_right_lon.to_s
+            },
+            {
+              city: city_name,
+              page: page.to_s,
+              size: size.to_s,
+              sort_by: sort_by
+            }
+          ).and_return(ok)
+          get "/V1/rooms?city=#{city_name}&topleft_lat=#{top_left_lat}&btmright_lat=#{btm_right_lat}&topleft_lon=#{top_left_lon}&btmright_lon=#{btm_right_lon}&page=#{page}&size=#{size}&sort_by=#{sort_by}"
+        end
       end
     end
   end
