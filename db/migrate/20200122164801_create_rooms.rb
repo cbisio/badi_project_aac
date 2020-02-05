@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRooms < ActiveRecord::Migration[6.0]
   def change
     create_table :rooms do |t|
@@ -8,10 +10,10 @@ class CreateRooms < ActiveRecord::Migration[6.0]
       t.integer :room_size
       t.integer :property_size
       t.text :description
-      t.float :latitude, :limit => 30
-      t.float :longitude, :limit => 30
+      t.float :latitude, limit: 30
+      t.float :longitude, limit: 30
       t.integer :num_visits
-      
+
       t.timestamps
     end
   end

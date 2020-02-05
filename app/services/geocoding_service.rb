@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# ObjectService that provides locations using a third party geocoding API
 class GeocodingService < ObjectService
   attr_reader :text
 
@@ -50,19 +53,21 @@ class GeocodingService < ObjectService
 
   def clean_locations_response(dirty_locations)
     locations = []
-    dirty_locations['results'].map { |result|
-      result_higher_than_city?(result) ? city = nil : city = result['address']['municipality']
+    dirty_locations['results'].map do |result|
+      city = if result_higher_than_city?(result)
+               nil
+             else
+               result['address']['municipality']
+             end
       locations.push(
-        {
-          name: result['address']['freeformAddress'],
-          city: city,
-          topleft_lat: result['viewport']['topLeftPoint']['lat'],
-          topleft_lon: result['viewport']['topLeftPoint']['lon'],
-          btmright_lat: result['viewport']['btmRightPoint']['lat'],
-          btmright_lon: result['viewport']['btmRightPoint']['lon']
-        }
+        name: result['address']['freeformAddress'],
+        city: city,
+        topleft_lat: result['viewport']['topLeftPoint']['lat'],
+        topleft_lon: result['viewport']['topLeftPoint']['lon'],
+        btmright_lat: result['viewport']['btmRightPoint']['lat'],
+        btmright_lon: result['viewport']['btmRightPoint']['lon']
       )
-    }
+    end
     {
       locations: locations
     }
@@ -71,9 +76,7 @@ class GeocodingService < ObjectService
   def result_higher_than_city?(result)
     is_higher = false
     if result['type'] == 'Geography'
-      if result['entityType'] == 'Country' || result['entityType'] == 'CountrySubdivision' || result['entityType'] == 'CountrySecondarySubdivision' || result['entityType'] == 'CountryTertiarySubdivision'
-        is_higher = true
-      end
+      is_higher = true if result['entityType'] == 'Country' || result['entityType'] == 'CountrySubdivision' || result['entityType'] == 'CountrySecondarySubdivision' || result['entityType'] == 'CountryTertiarySubdivision'
     end
     is_higher
   end

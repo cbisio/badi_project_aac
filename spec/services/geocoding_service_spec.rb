@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe GeocodingService do
-  let(:text) { "Balmes,Barcelona" }
+  let(:text) { 'Balmes,Barcelona' }
   let(:opts_empty) { {} }
-  let(:search_results) { [{ "name": "location1" }, {"name": "location2"}] }
-  
+  let(:search_results) { [{ "name": 'location1' }, { "name": 'location2' }] }
+
   context 'when third party API (TomTom) response code is 200' do
     it 'returns a Success object with the obtained data' do
       geocoding_service = GeocodingService.new(text, opts_empty)

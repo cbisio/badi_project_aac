@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ObjectService do
@@ -5,8 +7,8 @@ RSpec.describe ObjectService do
     it 'initializes a new instance with its attributes' do
       expect(ObjectService::Error.new('Error message', 'Error code').error_message).to eq('Error message')
       expect(ObjectService::Error.new('Error message', 'Error code').error_code).to eq('Error code')
-      expect(ObjectService::Error.new().error_message).to eq(nil)
-      expect(ObjectService::Error.new().error_message).to eq(nil)
+      expect(ObjectService::Error.new.error_message).to eq(nil)
+      expect(ObjectService::Error.new.error_message).to eq(nil)
     end
 
     it 'returns false when success? method is called' do

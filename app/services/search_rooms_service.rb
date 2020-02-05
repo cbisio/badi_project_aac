@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# ObjectService that performs room searches
 class SearchRoomsService < ObjectService
-  attr_reader :top_left_lat, :top_left_lon, :bottom_right_lat,:bottom_right_lon, :city, :page, :size
+  attr_reader :top_left_lat, :top_left_lon, :bottom_right_lat, :bottom_right_lon, :city, :page, :size
 
   def self.call(*args)
     new(*args).call
@@ -42,7 +45,7 @@ class SearchRoomsService < ObjectService
     response = Room.search(@search_definitions).results
 
     # Check if there were results and if so send them. Send an error otherwise.
-    if response.size > 0
+    if !response.empty?
       Success.new(clean_rooms_response(response))
     else
       Error.new(I18n.t('search_rooms_service.errors.no_rooms_found'), 404)
@@ -50,6 +53,7 @@ class SearchRoomsService < ObjectService
   end
 
   private
+
   def add_geo_bounding_box
     @search_definitions[:query][:bool][:must].push(
       geo_bounding_box: {
@@ -108,9 +112,9 @@ class SearchRoomsService < ObjectService
 
   def clean_rooms_response(dirty_response)
     rooms = []
-    dirty_response.map { |room|
+    dirty_response.map do |room|
       rooms.push(room['_source'])
-    }
+    end
     { rooms: rooms }
   end
 end

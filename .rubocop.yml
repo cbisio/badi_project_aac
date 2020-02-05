@@ -1,0 +1,30 @@
+Metrics/LineLength:
+  # This will disable the rule completely, regardless what other options you put
+  Enabled: false
+
+Metrics/BlockLength:
+  # This will disable the rule completely, regardless what other options you put
+  Enabled: false
+
+Metrics/MethodLength:
+  # This will disable the rule completely, regardless what other options you put
+  Enabled: false
+
+Metrics/AbcSize:
+  # This will disable the rule completely, regardless what other options you put
+  Enabled: false
+
+Layout/EndOfLine:
+  # This will disable the rule completely, regardless what other options you put
+  Enabled: false
+
+Style/Documentation:
+ # If you want the rule not to apply to a specific folder/file
+  Exclude:
+    - 'db/migrate/*'
+    - 'config/application.rb'
+
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'app/mailers/*'

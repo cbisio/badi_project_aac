@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Extra, type: :model do
@@ -15,5 +17,4 @@ RSpec.describe Extra, type: :model do
   it 'uniqueness' do
     should validate_uniqueness_of(:name)
   end
-
 end

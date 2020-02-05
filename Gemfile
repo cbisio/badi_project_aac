@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -17,7 +19,7 @@ gem 'grape_on_rails_routes'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Sharing configuration variables across environments
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: %i[development test]
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
@@ -28,16 +30,15 @@ group :development, :test do
   # Use Pry to debug
   gem 'pry-rails'
   # Enforces Rails best practices and coding conventions.
-  gem 'rubocop-rails', require: false
   gem 'brakeman'
+  gem 'rubocop-rails', require: false
 end
 
 group :test do
-  gem 'factory_bot_rails'
-  gem 'shoulda-matchers'
-  gem 'faker'
   gem 'database_cleaner'
-  gem 'brakeman'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -53,14 +54,14 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Httparty gem to create http requests
 gem 'httparty'
 
 gem 'geocoder'
 
-#CRON
+# CRON
 gem 'whenever', require: false
 
 # Elastic search gems

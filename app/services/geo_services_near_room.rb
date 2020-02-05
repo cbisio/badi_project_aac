@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Locate services near a room
 class GeoServicesNearRoom
   attr_reader :text
 
@@ -5,12 +8,11 @@ class GeoServicesNearRoom
     new(*args).call
   end
 
-  def initialize(id_room, opts = {})
+  def initialize(id_room, _opts = {})
     @countries = 'ES'
     @language = 'en-US'
 
-
-    if ! @rls = RoomLocationService.find_by("room_id = ?" , id_room)
+    unless (@rls = RoomLocationService.find_by('room_id = ?', id_room))
       @rls = RoomLocationService.new
       @rls.room_id = id_room
     end
@@ -36,12 +38,11 @@ class GeoServicesNearRoom
 
     if response.code == 200
       json = JSON.parse(response.body)
-      json['summary']["totalResults"];
+      json['summary']['totalResults']
     else
       0
     end
   end
-
 
   private
 
@@ -51,7 +52,7 @@ class GeoServicesNearRoom
       countrySet: 'ES',
       lat: @room.latitude,
       lon: @room.longitude,
-      radius:@distance_m,
+      radius: @distance_m,
       limit: 100
     }
 

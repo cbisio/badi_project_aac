@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe RoomView, type: :model do
@@ -11,5 +13,4 @@ RSpec.describe RoomView, type: :model do
     should validate_length_of(:ip).is_at_least(7)
     should validate_length_of(:ip).is_at_most(15)
   end
-
 end

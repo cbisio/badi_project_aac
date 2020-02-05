@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   it { should have_many(:rooms) }
 
   it 'validate presence of require fields ' do
@@ -19,5 +20,4 @@ RSpec.describe User, type: :model do
     should validate_length_of(:name).is_at_least(3)
     should validate_length_of(:name).is_at_most(80)
   end
-
 end

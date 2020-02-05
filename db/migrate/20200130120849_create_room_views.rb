@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRoomViews < ActiveRecord::Migration[6.0]
   def change
     create_table :room_views do |t|
