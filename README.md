@@ -1,5 +1,5 @@
 # Bootcamp Ruby template
-Here you will find the skeleton that you need to do a Rails project using the same toolset that we use @ badi. This repository corresponds to the backend side of our Badi project, carried out by Arnald Aulí, Camilas Bisio and Albert Llebaria. Check out our home [wiki page] to meet the team! :smile:
+Here you will find the skeleton that you need to do a Rails project using the same toolset that we use @ badi. This repository corresponds to the backend side of our Badi project, carried out by Arnald Aulí, Camilas Bisio and Albert Llebaria. Check out our home [wiki page](https://github.com/cbisio/badi_project_aac/wiki) to meet the team! :smile:
 
 If any further information is required you can check our wiki, where we have tried to explain and justify everything that has been implemented.
 
