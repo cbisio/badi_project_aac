@@ -23,7 +23,7 @@ For further scalability, we have also implemented an internationalization servic
 Given that our search endpoint will provide locations obtained by a third party API, we've had to study different providers. We finally have selected TomTom's API but you can check our discussion about which approach to choose in our [Map API wiki page](https://github.com/cbisio/badi_project_aac/wiki/Map-API).
 
 ## Deployment
-Our Ruby on Rails API runs in an AWS EC2 service. Find more details in our [AWS wiki page](https://github.com/cbisio/badi_project_aac/wiki/Amazon-Web-Services-(AWS).
+Our Ruby on Rails API runs in an AWS EC2 service. Find more details in our [AWS wiki page](https://github.com/cbisio/badi_project_aac/wiki/Amazon-Web-Services-(AWS)).
 
 ## Testing
 We use TDD methodology. Thus, we expect to have a good code coverage, as close as you can to 100%, as well as tests that are significant and stable. However, if any areas are not covered by using TDD, testing will be refactored afterwards if coverage percentage needs to be increased.
