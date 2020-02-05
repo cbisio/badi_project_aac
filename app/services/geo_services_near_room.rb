@@ -12,7 +12,7 @@ class GeoServicesNearRoom
     @countries = 'ES'
     @language = 'en-US'
 
-    unless @rls == RoomLocationService.find_by('room_id = ?', id_room)
+    unless (@rls = RoomLocationService.find_by('room_id = ?', id_room))
       @rls = RoomLocationService.new
       @rls.room_id = id_room
     end
