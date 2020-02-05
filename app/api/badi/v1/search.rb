@@ -14,6 +14,8 @@ module Badi
         opts = {}
         opts[:limit] = params[:limit] if params[:limit]
 
+        result = GeocodingService.call(params[:text], opts)
+
         raise Badi::V1::ExceptionHandler::GeocodingServiceError.new(result.error_code), result.error_message unless result.success?
 
         status :ok
