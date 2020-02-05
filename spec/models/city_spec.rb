@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe City, type: :model do
-  
   it { should have_many(:rooms) }
 
   it 'name length min max' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Badi
   class Health < Grape::API
     desc 'Returns the health of the service'

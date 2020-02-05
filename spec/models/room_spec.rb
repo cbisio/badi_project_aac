@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  
   it { should belong_to(:owner) }
 
   it { should belong_to(:city) }
@@ -20,7 +21,7 @@ RSpec.describe Room, type: :model do
     should validate_presence_of(:address)
     should validate_presence_of(:currency)
   end
- 
+
   it 'currency must be € or $' do
     room = Room.new
     expect(room).to validate_inclusion_of(:currency).in_array(%w[€ $])
@@ -30,7 +31,7 @@ RSpec.describe Room, type: :model do
     should validate_length_of(:name).is_at_least(5)
     should validate_length_of(:name).is_at_most(80)
   end
- 
+
   it 'address length min max' do
     should validate_length_of(:address).is_at_least(10)
     should validate_length_of(:address).is_at_most(200)
@@ -38,7 +39,7 @@ RSpec.describe Room, type: :model do
 
   it 'price number values: min max' do
     should validate_numericality_of(:price).is_greater_than(10)
-    should validate_numericality_of(:price).is_less_than(10000)
+    should validate_numericality_of(:price).is_less_than(10_000)
   end
 
   it 'latitude number values: min max' do

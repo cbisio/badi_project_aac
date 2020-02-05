@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Badi
   module V1
     module ExceptionHandler
@@ -18,7 +20,6 @@ module Badi
       end
 
       included do
-
         rescue_from Grape::Exceptions::ValidationErrors do |e|
           error!(e.message, 422)
         end

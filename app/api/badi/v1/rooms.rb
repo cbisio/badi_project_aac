@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Badi
   module V1
     class Rooms < Grape::API
@@ -6,17 +8,15 @@ module Badi
         requires :id, type: Integer, message: I18n.t('api.rooms.errors.id_param_required')
       end
       get '/room/:id' do
-        begin
-          @room = Room.find(@params[:id])
-          @ip = env['REMOTE_ADDR']
-          if (@room.room_views.where(ip: @ip, created_at: (Time.now - 1.day)..Time.now ).exists? == false)
-            @room.update_attribute(:num_visits, @room.num_visits + 1)
-          end
-          @room_view = @room.room_views.create!(:ip => @ip)
-          present @room, with: Badi::V1::Entities::Room
-        rescue ActiveRecord::RecordNotFound => e
-          raise Badi::V1::ExceptionHandler::RoomNotFound, e.message
+        @room = Room.find(@params[:id])
+        @ip = env['REMOTE_ADDR']
+        if @room.room_views.where(ip: @ip, created_at: (Time.now - 1.day)..Time.now).exists? == false
+          @room.update_attribute(:num_visits, @room.num_visits + 1)
         end
+        @room_view = @room.room_views.create!(ip: @ip)
+        present @room, with: Badi::V1::Entities::Room
+      rescue ActiveRecord::RecordNotFound => e
+        raise Badi::V1::ExceptionHandler::RoomNotFound, e.message
       end
 
       # GET /rooms
@@ -28,7 +28,7 @@ module Badi
         optional :city, type: String
         optional :page, type: String
         optional :size, type: String
-        optional :sort_by, type: String, values: ['health', 'leisure', 'transport', 'food', 'tourism']
+        optional :sort_by, type: String, values: %w[health leisure transport food tourism]
       end
       get '/rooms' do
         # Optional query params

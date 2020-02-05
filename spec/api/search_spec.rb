@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Search', type: :request do
   describe 'GET /search' do
-    let(:text) { "Balmes,Barcelona"}
+    let(:text) { 'Balmes,Barcelona' }
     let(:limit) { 3 }
 
     context 'when search_text query param exists' do
       before do
-        ok = double("Search locations Results", "success?" => true, data: { locations: [] })
+        ok = double('Search locations Results', 'success?' => true, data: { locations: [] })
         expect(GeocodingService).to receive(:call).with(text, {}).and_return(ok)
         get "/V1/search?text=#{text}"
       end
@@ -27,7 +29,7 @@ RSpec.describe 'Search', type: :request do
 
       context 'when limit param exists' do
         before do
-          ok = double("Search locations Results", "success?" => true, data: { locations: Array.new(limit) })
+          ok = double('Search locations Results', 'success?' => true, data: { locations: Array.new(limit) })
           expect(GeocodingService).to receive(:call).with(
             text,
             limit: limit

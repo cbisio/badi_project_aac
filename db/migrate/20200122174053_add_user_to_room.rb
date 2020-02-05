@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddUserToRoom < ActiveRecord::Migration[6.0]
   def change
     add_reference :rooms, :user, null: false, foreign_key: true

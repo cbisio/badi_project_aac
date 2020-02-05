@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRoomLocationServices < ActiveRecord::Migration[6.0]
   def change
     create_table :room_location_services do |t|

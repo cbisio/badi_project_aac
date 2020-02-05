@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GeocodingService < ObjectService
   attr_reader :text
 
@@ -50,19 +52,17 @@ class GeocodingService < ObjectService
 
   def clean_locations_response(dirty_locations)
     locations = []
-    dirty_locations['results'].map { |result|
+    dirty_locations['results'].map do |result|
       result_higher_than_city?(result) ? city = nil : city = result['address']['municipality']
       locations.push(
-        {
-          name: result['address']['freeformAddress'],
-          city: city,
-          topleft_lat: result['viewport']['topLeftPoint']['lat'],
-          topleft_lon: result['viewport']['topLeftPoint']['lon'],
-          btmright_lat: result['viewport']['btmRightPoint']['lat'],
-          btmright_lon: result['viewport']['btmRightPoint']['lon']
-        }
+        name: result['address']['freeformAddress'],
+        city: city,
+        topleft_lat: result['viewport']['topLeftPoint']['lat'],
+        topleft_lon: result['viewport']['topLeftPoint']['lon'],
+        btmright_lat: result['viewport']['btmRightPoint']['lat'],
+        btmright_lon: result['viewport']['btmRightPoint']['lon']
       )
-    }
+    end
     {
       locations: locations
     }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ObjectService
   class Error
     attr_reader :error_message, :error_code
