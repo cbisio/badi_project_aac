@@ -9,7 +9,7 @@ module Badi
         begin
           @room = Room.find(@params[:id])
           @ip = env['REMOTE_ADDR']
-          if(@room.room_views.where(ip: @ip, created_at: (Time.now - 1.day)..Time.now ).exists? == false)
+          if (@room.room_views.where(ip: @ip, created_at: (Time.now - 1.day)..Time.now ).exists? == false)
             @room.update_attribute(:num_visits, @room.num_visits + 1)
           end
           @room_view = @room.room_views.create!(:ip => @ip)
