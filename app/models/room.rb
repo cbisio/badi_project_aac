@@ -26,10 +26,15 @@ class Room < ApplicationRecord
 
   # Customize the JSON serialization for Elasticsearch
   def as_indexed_json(_options = {})
-    as_json(include: {
-              city: { only: :name },
-              room_location_service: { only: %i[health leisure transport food tourism] }
-            }).merge location: { lat: latitude, lon: longitude }
+    as_json(
+      include: {
+        city: {},
+        room_location_service: {},
+        photos: {},
+        extras: {},
+        owner: {}
+      }
+    ).merge location: { lat: latitude, lon: longitude }
   end
 
   # Associations

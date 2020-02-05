@@ -18,13 +18,13 @@ module Badi
         expose :num_visits
         expose :created_at
         expose :updated_at
-        expose :owner
+        expose :owner, using: Badi::V1::Entities::User
         expose :address
-        expose :city
+        expose :city, using: Badi::V1::Entities::City
         expose :currency
-        expose :extras
-        expose :photos
-        expose :room_location_service
+        expose :extras, using: Badi::V1::Entities::Extra
+        expose :photos, using: Badi::V1::Entities::Photo
+        expose :room_location_service, using: Badi::V1::Entities::RoomLocationService
       end
     end
   end
