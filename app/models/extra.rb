@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Extra model
 class Extra < ApplicationRecord
   has_and_belongs_to_many :rooms
 

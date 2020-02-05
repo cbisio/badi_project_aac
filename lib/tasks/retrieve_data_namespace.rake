@@ -5,22 +5,22 @@ task :retrieve_data, %i[page city_letter] => :environment do |_t, args|
 
   Geocoder.configure(ip_lookup: :ipinfo_io)
 
-  if args.city_letter == 'M'
-    query = {
-      'page' => args.page,
-      'bounds' => { "ne": { "lat": 40.64352, "lng": -3.51801 }, "sw": { "lat": 40.31207, "lng": -3.889 } }
-    }
-  elsif args.city_letter == 'V'
-    query = {
-      'page' => args.page,
-      'bounds' => { "ne": { "lat": 39.5073225, "lng": -0.2914778 }, "sw": { "lat": 39.308248, "lng": -0.4315448 } }
-    }
-  else
-    query = {
-      'page' => args.page,
-      'bounds' => { "ne": { "lat": 41.4695761, "lng": 2.2280099 }, "sw": { "lat": 41.320004, "lng": 2.0695258 } }
-    }
-  end
+  query = if args.city_letter == 'M'
+            {
+              'page' => args.page,
+              'bounds' => { "ne": { "lat": 40.64352, "lng": -3.51801 }, "sw": { "lat": 40.31207, "lng": -3.889 } }
+            }
+          elsif args.city_letter == 'V'
+            {
+              'page' => args.page,
+              'bounds' => { "ne": { "lat": 39.5073225, "lng": -0.2914778 }, "sw": { "lat": 39.308248, "lng": -0.4315448 } }
+            }
+          else
+            {
+              'page' => args.page,
+              'bounds' => { "ne": { "lat": 41.4695761, "lng": 2.2280099 }, "sw": { "lat": 41.320004, "lng": 2.0695258 } }
+            }
+          end
   headers = {
     'authorization' => ENV['BADI_API_KEY']
   }

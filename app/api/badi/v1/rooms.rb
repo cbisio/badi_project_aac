@@ -2,6 +2,7 @@
 
 module Badi
   module V1
+    # Rooms Grape API Class
     class Rooms < Grape::API
       # GET /room/{id}
       params do
@@ -10,9 +11,7 @@ module Badi
       get '/room/:id' do
         @room = Room.find(@params[:id])
         @ip = env['REMOTE_ADDR']
-        if @room.room_views.where(ip: @ip, created_at: (Time.now - 1.day)..Time.now).exists? == false
-          @room.update_attribute(:num_visits, @room.num_visits + 1)
-        end
+        @room.update_attribute(:num_visits, @room.num_visits + 1) if @room.room_views.where(ip: @ip, created_at: (Time.now - 1.day)..Time.now).exists? == false
         @room_view = @room.room_views.create!(ip: @ip)
         present @room, with: Badi::V1::Entities::Room
       rescue ActiveRecord::RecordNotFound => e
@@ -45,12 +44,10 @@ module Badi
         # Call the SearchRoomsService and send response
         result = SearchRoomsService.call(top_left_point, bottom_right_point, opts)
 
-        if result.success?
-          status :ok
-          present result.data, with: Badi::V1::Entities::Rooms
-        else
-          raise Badi::V1::ExceptionHandler::SearchRoomsServiceError.new(result.error_code), result.error_message
-        end
+        raise Badi::V1::ExceptionHandler::SearchRoomsServiceError.new(result.error_code), result.error_message unless result.success?
+
+        status :ok
+        present result.data, with: Badi::V1::Entities::Rooms
       end
     end
   end

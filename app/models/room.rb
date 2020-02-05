@@ -2,6 +2,7 @@
 
 require 'elasticsearch/model'
 
+# Room model
 class Room < ApplicationRecord
   # Elastic Search
   include Elasticsearch::Model

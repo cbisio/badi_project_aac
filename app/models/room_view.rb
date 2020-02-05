@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# RoomView model
 class RoomView < ApplicationRecord
   belongs_to :room
 

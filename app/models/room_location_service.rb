@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# RoomLocationService model
 class RoomLocationService < ApplicationRecord
   belongs_to :room
 

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# ObjectService that performs room searches
 class SearchRoomsService < ObjectService
   attr_reader :top_left_lat, :top_left_lon, :bottom_right_lat, :bottom_right_lon, :city, :page, :size
 

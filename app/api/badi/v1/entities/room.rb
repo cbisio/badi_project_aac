@@ -3,6 +3,7 @@
 module Badi
   module V1
     module Entities
+      # Room entity
       class Room < Grape::Entity
         expose :id
         expose :name
