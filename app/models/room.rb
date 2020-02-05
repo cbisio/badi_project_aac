@@ -28,13 +28,13 @@ class Room < ApplicationRecord
   def as_indexed_json(_options = {})
     as_json(
       include: {
-              city: {},
-              room_location_service: {},
-              photos: {},
-              extras: {},
-              owner: {}
-            }
-          ).merge location: { lat: latitude, lon: longitude }
+        city: {},
+        room_location_service: {},
+        photos: {},
+        extras: {},
+        owner: {}
+      }
+    ).merge location: { lat: latitude, lon: longitude }
   end
 
   # Associations
