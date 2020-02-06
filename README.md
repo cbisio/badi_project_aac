@@ -32,3 +32,6 @@ To check your test suite you can simply run `bundle exec rspec`, and after the e
 
 ## Guidelines
 We have used [Rubocop](https://github.com/rubocop-hq/rubocop) to keep the code clean of offenses. We have customized some rules that the team agreed. Those can be found in the .editorconfig file.
+
+## Postman Collection
+In order to easily check our endpoints behavior, we have created a Postman collection. You can find it [here](https://github.com/cbisio/badi_project_aac/blob/master/doc/Badi_project_aac.postman_collection.json) so you can add it to your Postman. It is in json format and it contains all the endoints that have been created in the project.
