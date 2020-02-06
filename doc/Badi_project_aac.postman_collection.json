@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "c159551f-aabc-4c56-ab67-01c7f776f392",
+		"name": "Badi_project_aac",
+		"description": "This collection contains the different available endpoints of our API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Development",
+			"item": [
+				{
+					"name": "Our API",
+					"item": [
+						{
+							"name": "search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/V1/search?text=Barcelona%20Corsega&limit=3",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"V1",
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "Barcelona%20Corsega",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "limit",
+											"value": "3",
+											"description": "OPTIONAL"
+										}
+									]
+								},
+								"description": "Search locations that matches a text query param."
+							},
+							"response": []
+						},
+						{
+							"name": "rooms",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/V1/rooms?topleft_lat=41.46827&topleft_lon=2.05248&btmright_lat=41.31704&btmright_lon=2.22998&city=Barcelona&page=1&size=5&sort_by=food",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"V1",
+										"rooms"
+									],
+									"query": [
+										{
+											"key": "topleft_lat",
+											"value": "41.46827",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "topleft_lon",
+											"value": "2.05248",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "btmright_lat",
+											"value": "41.31704",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "btmright_lon",
+											"value": "2.22998",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "city",
+											"value": "Barcelona",
+											"description": "OPTIONAL"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "OPTIONAL"
+										},
+										{
+											"key": "size",
+											"value": "5",
+											"description": "OPTIONAL"
+										},
+										{
+											"key": "sort_by",
+											"value": "food",
+											"description": "OPTIONAL"
+										}
+									]
+								},
+								"description": "Search for rooms based on the specified query params constrains"
+							},
+							"response": []
+						},
+						{
+							"name": "room/:id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/V1/room/12",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"V1",
+										"room",
+										"12"
+									]
+								},
+								"description": "Get a room with its details by specifiyng its id as a parameter."
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Third Party APIs",
+					"item": [
+						{
+							"name": "locations from TomTom api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.tomtom.com/search/2/search/balmes%20barcelona+spain.json?key=LlbLYJrB2s4j7ZlXoTCZdxYozwCmKNSJ&countrySet=ES",
+									"protocol": "https",
+									"host": [
+										"api",
+										"tomtom",
+										"com"
+									],
+									"path": [
+										"search",
+										"2",
+										"search",
+										"balmes%20barcelona+spain.json"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "LlbLYJrB2s4j7ZlXoTCZdxYozwCmKNSJ"
+										},
+										{
+											"key": "countrySet",
+											"value": "ES"
+										}
+									]
+								},
+								"description": "TomTom Api provides locations. See more details in https://developer.tomtom.com/search-api/search-api-documentation-search/fuzzy-search"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Production",
+			"item": [
+				{
+					"name": "Our API",
+					"item": [
+						{
+							"name": "search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://3.82.105.143:3000/V1/search?text=Barcelona%20Corsega&limit=3",
+									"protocol": "http",
+									"host": [
+										"3",
+										"82",
+										"105",
+										"143"
+									],
+									"port": "3000",
+									"path": [
+										"V1",
+										"search"
+									],
+									"query": [
+										{
+											"key": "text",
+											"value": "Barcelona%20Corsega",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "limit",
+											"value": "3",
+											"description": "OPTIONAL"
+										}
+									]
+								},
+								"description": "Search locations that matches a text query param."
+							},
+							"response": []
+						},
+						{
+							"name": "rooms",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://3.82.105.143:3000/V1/rooms?topleft_lat=41.46827&topleft_lon=2.05248&btmright_lat=41.31704&btmright_lon=2.22998&city=Barcelona&page=1&size=5&sort_by=food",
+									"protocol": "http",
+									"host": [
+										"3",
+										"82",
+										"105",
+										"143"
+									],
+									"port": "3000",
+									"path": [
+										"V1",
+										"rooms"
+									],
+									"query": [
+										{
+											"key": "topleft_lat",
+											"value": "41.46827",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "topleft_lon",
+											"value": "2.05248",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "btmright_lat",
+											"value": "41.31704",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "btmright_lon",
+											"value": "2.22998",
+											"description": "REQUIRED"
+										},
+										{
+											"key": "city",
+											"value": "Barcelona",
+											"description": "OPTIONAL"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"description": "OPTIONAL"
+										},
+										{
+											"key": "size",
+											"value": "5",
+											"description": "OPTIONAL"
+										},
+										{
+											"key": "sort_by",
+											"value": "food",
+											"description": "OPTIONAL"
+										}
+									]
+								},
+								"description": "Search for rooms based on the specified query params constrains"
+							},
+							"response": []
+						},
+						{
+							"name": "room/:id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://3.82.105.143:3000/V1/room/12",
+									"protocol": "http",
+									"host": [
+										"3",
+										"82",
+										"105",
+										"143"
+									],
+									"port": "3000",
+									"path": [
+										"V1",
+										"room",
+										"12"
+									]
+								},
+								"description": "Get a room with its details by specifiyng its id as a parameter."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "006786ee-1f15-4226-9949-92bc51ad940e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f04d9a9f-3fb2-4a8c-aa16-f2a373939df0",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Third Party APIs",
+					"item": [
+						{
+							"name": "locations from TomTom api",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.tomtom.com/search/2/search/balmes%20barcelona+spain.json?key=LlbLYJrB2s4j7ZlXoTCZdxYozwCmKNSJ&countrySet=ES",
+									"protocol": "https",
+									"host": [
+										"api",
+										"tomtom",
+										"com"
+									],
+									"path": [
+										"search",
+										"2",
+										"search",
+										"balmes%20barcelona+spain.json"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "LlbLYJrB2s4j7ZlXoTCZdxYozwCmKNSJ"
+										},
+										{
+											"key": "countrySet",
+											"value": "ES"
+										}
+									]
+								},
+								"description": "TomTom Api provides locations. See more details in https://developer.tomtom.com/search-api/search-api-documentation-search/fuzzy-search"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "36276658-8367-4ff4-8aab-5eacca9d8ccb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fcd99095-bd23-4ad0-b5e2-569572d062d9",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
